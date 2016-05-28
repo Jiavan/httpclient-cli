@@ -5,6 +5,8 @@
 // #include <netinet/in.h>
 // inet_pton所需头
 // #include <arpa/inet.h>
+// write 函数
+// #include <unistd.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -13,6 +15,8 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <errno.h>
 
 #define PORT 80
 #define IP "61.147.124.120"
@@ -25,7 +29,7 @@ int main(int argc, char const *argv[]) {
 	// return 成功则返回socket处理代码，失败返回-1
 	int socketid = socket(AF_INET, SOCK_STREAM, 0);
 	char str1[4096], str2[4096], *str;
-	int len;
+	int len, res;
 
 	// sockaddr_in 保存链接信息的结构体
 	struct sockaddr_in serveraddr;
@@ -81,6 +85,15 @@ int main(int argc, char const *argv[]) {
     strcat(str1, str2);
     strcat(str1, "\r\n\r\n");
     printf("%s\n",str1);
+
+    // write()会返回实际写入的字节数。当有错误发生时则返回-1，错误代码存入errno中
+    res = write(socketid, str1, strlen(str1));
+    if (res < 0) {
+    	printf("发送消息失败，错误码: %d，错误信息: %s\n", errno, strerror(errno));
+    	exit(1);
+    } else {
+    	printf("发送消息成功，共发送了%d byte\n", res);
+    }
 
 	return 0;
 }
