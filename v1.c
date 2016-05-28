@@ -97,3 +97,38 @@ int main(int argc, char const *argv[]) {
 
 	return 0;
 }
+
+
+
+
+ // int cc;
+ //        if(-1 == (cc = connect(cfd,(struct sockaddr*)&cadd,(socklen_t)sizeof(cadd))))
+ //        {
+ //                printf("connect failed of client!\n");
+ //                exit(1);
+ //        }
+ //        printf("connect success!\n");
+ 
+ //        //向服务器发送url请求的request
+ //        int cs;
+ //        if(-1 == (cs = send(cfd,request,strlen(request),0)))
+ //        {
+ //                printf("向服务器发送请求的request失败!\n");
+ //                exit(1);
+ //        }
+ //        printf("发送成功,发送的字节数:%d\n",cs);
+ 
+ //        //客户端接收服务器的返回信息
+ //        memset(text,0,BUFSIZE);
+ //        int cr;
+ //        if(-1 == (cr = recv(cfd,text,BUFSIZE,0)))
+ //        {
+ //                printf("recieve failed!\n");
+ //                exit(1);
+ //        }
+ //        else
+ //        {
+ //                printf("receive succecc!\n");
+ //        }
+ //        close(cfd);
+ // }

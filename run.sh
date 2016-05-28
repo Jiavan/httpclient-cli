@@ -1,3 +1,5 @@
 # !/bin/bash
-gcc test.c -o test
-./test
+gcc httpclient_cli.c -o httpclient
+echo "请输入URL: "
+read path
+./httpclient $path
