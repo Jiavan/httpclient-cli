@@ -6,15 +6,15 @@
 #include <sys/types.h>
 #include <netdb.h>
 #include <unistd.h>
-
 #define BUFFSIZE 4096
-#define TEXT_BUFFSIZE 40960
+#define TEXT_BUFFSIZE 1024
 #define PORT 80
+
 void geturl(char *url) {
 	char myurl[BUFFSIZE], host[BUFFSIZE], 
 		GET[BUFFSIZE], request[BUFFSIZE],
 		text[BUFFSIZE], *phost = 0;
-	int socketid, connectid, res, recvid;
+	int socketid, connectid, res, recvid, flag = 1;
 	struct hostent *purl = NULL;
 	struct sockaddr_in sockinfo;
 
@@ -43,6 +43,7 @@ void geturl(char *url) {
 		printf("创建socket连接失败\n");
 		exit(1);
 	}
+	printf("-> 创建socket连接成功\n");
 
 	// 函数说明：gethostbyname()会返回一个hostent结构，参数name可以为一个主机名或IPv4/IPv6的IP地址。
 	// hostent结构说明如下：
@@ -72,6 +73,12 @@ void geturl(char *url) {
 	strcat(request, "HOST: ");
 	strcat(request, host);
 	strcat(request, "\r\n");
+	strcat(request, "User-Agent: ");
+	strcat(request, "2333 Browser");
+	strcat(request, "\r\n");
+	strcat(request, "Author: ");
+	strcat(request, "By Jiavan&Kellen&LZY");
+	strcat(request, "\r\n");
 	strcat(request,"Cache-Control: no-cache\r\n\r\n");
 
 	// 连接到远端服务器
@@ -80,6 +87,7 @@ void geturl(char *url) {
 		printf("连接远端服务器失败\n");
 		exit(1);
 	}
+	printf("-> 连接到远端服务器成功\n");
 
 	// 向服务器发送GET请求
 	res = send(socketid, request, strlen(request), 0);
@@ -87,24 +95,33 @@ void geturl(char *url) {
 		printf("向服务器发送GET请求失败\n");
 		exit(1);
 	}
-	printf("发送GET请求成功，共发送了%d bytes\n", res);
+	printf("-> 发送GET请求成功，共发送了%d bytes\n", res);
+	printf("-> HTTP请求报文如下\n--------HTTP Request--------\n%s\n", request);
+	printf("-> HTTP响应内容正在重定向至index.html\n");
 
 	// 接受服务器的响应
-	memset(text, 0, TEXT_BUFFSIZE);
-	recvid = recv(socketid, text, TEXT_BUFFSIZE, 0);
-	if (recvid == -1) {
-		printf("接受远端数据失败\n");
+	if (freopen("index.html", "w", stdout) == NULL) {
+		printf("输出重定向错误\n");
 		exit(1);
 	} else {
-		//printf("接收到服务器的响应，内容如下：\n%s\n", text);
-		printf("输出已重定向\n");
-		if (freopen("index.html", "w", stdout) == NULL) {
-			printf("输出重定向错误\n");
-		} else {
-			printf("%s", text);
+		while (flag) {
+			memset(text, 0, TEXT_BUFFSIZE);
+			int bufflen = recv(socketid, text, TEXT_BUFFSIZE, 0);
+			
+			if (bufflen < 0) {
+				printf("接收数据流出错\n");
+				fclose(stdout);
+				close(socketid);
+				exit(1);
+			}
+			if (bufflen > 0) {
+				printf("%s\n", text);
+			} else {
+				flag = 0;
+			}
 		}
-		fclose(stdout);
 	}
+	fclose(stdout);
 	close(socketid);
 }
 

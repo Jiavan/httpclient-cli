@@ -1,5 +1,5 @@
 HTTP/1.1 200 OK
-Date: Sat, 28 May 2016 12:58:41 GMT
+Date: Sun, 29 May 2016 07:08:31 GMT
 Server: Apache/2.4.7 (Ubuntu)
 Last-Modified: Fri, 06 May 2016 01:50:30 GMT
 ETag: "98f-53222af026580"
@@ -32,7 +32,8 @@ Content-Type: text/html
 		</select>
 		<br />
 		<span>Nationality</span>
-		<input type="text" name="nationality" placeholder="nationality"></input><br />
+		<input type="text" name="nationality" placeholder="nationa
+lity"></input><br />
 		<span>Passport</span>
 		<input type="text" name="passport" placeholder="passport"></input><br />
 		<span>Member</span>
@@ -47,3 +48,47 @@ Content-Type: text/html
 		<select name="student">
 			<option value="yes">Yes</option>
 			
+<option value="no">No</option>
+		</select>
+		<br />
+		<span>Organiztion</span>
+		<input type="text" name="organization" placeholder="organization"></input><br />
+		<span>Cost</span>
+		<input type="text" name="cost" placeholder="cost"></input><br />
+		<span>Paper</span>
+		<input type="text" name="paper" placeholder="paper"></input><br />
+		<span>Hotel</span>
+		<input type="text" name="hotel" placeholder="hotel"></input><br />
+		<span>Tourism</span>
+		<input type="text" name="tourism" placeholder="tourism"></input><br />
+		<input type="submit" value="submit" id="submit" />
+	</form>
+</div>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function (event) {
+		var button = document.getElementById('submit');
+		var form = document.forms[0], i = 0;
+		button.onclick = function (event) {
+			for (i = 0; i < form.length; i++) {
+				if (form[i].type === 'text' && form[i].value.trim() === '') {
+					form[i].focus();
+					form[i].setAttribute('class', 'warning');
+					return false;
+				} else {
+
+
+				}
+			}
+		}
+
+		for (i = 0; i < form.length; i++) {
+			if (form[i].type === 'text') {
+				form[i].onblur = function (event) {
+					event.target.setAttribute('class', '');
+				}
+			}
+		}
+	}, false);
+</script>
+</body>
+</html>
