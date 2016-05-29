@@ -1,0 +1,94 @@
+HTTP/1.1 200 OK
+Date: Sun, 29 May 2016 07:08:31 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Last-Modified: Fri, 06 May 2016 01:50:30 GMT
+ETag: "98f-53222af026580"
+Accept-Ranges: bytes
+Content-Length: 2447
+Vary: Accept-Encoding
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to CW2016</title>
+	<link rel="stylesheet" type="text/css" href="src/css/style.css">
+</head>
+<body>
+<div class="info">
+<h1>Welcome to CW2016!</h1>
+<p>Fill in the information on the right and we will send you an e-mail.</p>
+</div>
+<div class="form-box">
+	<form name="info" action="register.php" method="post">
+		<span>Username</span>
+		<input type="text" name="username" placeholder="username"></input><br />
+		<span>Email</span>
+		<input type="text" name="email" placeholder="email"></input><br />
+		<span>Gender</span>
+		<select name="gender" value="M">
+			<option value="F">F</option>
+			<option value="M">M</option>
+		</select>
+		<br />
+		<span>Nationality</span>
+		<input type="text" name="nationality" placeholder="nationa
+lity"></input><br />
+		<span>Passport</span>
+		<input type="text" name="passport" placeholder="passport"></input><br />
+		<span>Member</span>
+		<select name="member">
+			<option value="IEEE">IEEE</option>
+			<option value="ACM">ACM</option>
+			<option value="CCF">CCF</option>
+			<option value="None">None</option>
+		</select>
+		<br />
+		<span>Student</span>
+		<select name="student">
+			<option value="yes">Yes</option>
+			
+<option value="no">No</option>
+		</select>
+		<br />
+		<span>Organiztion</span>
+		<input type="text" name="organization" placeholder="organization"></input><br />
+		<span>Cost</span>
+		<input type="text" name="cost" placeholder="cost"></input><br />
+		<span>Paper</span>
+		<input type="text" name="paper" placeholder="paper"></input><br />
+		<span>Hotel</span>
+		<input type="text" name="hotel" placeholder="hotel"></input><br />
+		<span>Tourism</span>
+		<input type="text" name="tourism" placeholder="tourism"></input><br />
+		<input type="submit" value="submit" id="submit" />
+	</form>
+</div>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function (event) {
+		var button = document.getElementById('submit');
+		var form = document.forms[0], i = 0;
+		button.onclick = function (event) {
+			for (i = 0; i < form.length; i++) {
+				if (form[i].type === 'text' && form[i].value.trim() === '') {
+					form[i].focus();
+					form[i].setAttribute('class', 'warning');
+					return false;
+				} else {
+
+
+				}
+			}
+		}
+
+		for (i = 0; i < form.length; i++) {
+			if (form[i].type === 'text') {
+				form[i].onblur = function (event) {
+					event.target.setAttribute('class', '');
+				}
+			}
+		}
+	}, false);
+</script>
+</body>
+</html>
