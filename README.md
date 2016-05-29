@@ -206,7 +206,6 @@ EINVAL 传给系统调用的参数不正确
 ```c
 socketid = socket(AF_INET, SOCK_STREAM, 0);
 ```
-
 1. 设置连接信息结构
 ```c
 memset(&sockinfo, 0, sizeof(struct sockaddr_in));
@@ -214,7 +213,6 @@ sockinfo.sin_family = AF_INET;
 sockinfo.sin_addr.s_addr = *((unsigned long *)purl->h_addr_list[0]);
 sockinfo.sin_port = htons(PORT);
 ```
-
 2. 构造http请求
 ```c
 memset(request, 0, BUFFSIZE);
@@ -233,7 +231,6 @@ strcat(request, "By Jiavan&Kellen&LZY");
 strcat(request, "\r\n");
 strcat(request,"Cache-Control: no-cache\r\n\r\n");
 ```
-
 3. 连接到远端服务器
 ```c
 // 成功则返回0，失败返回-1
@@ -241,7 +238,6 @@ strcat(request,"Cache-Control: no-cache\r\n\r\n");
 // http://blog.csdn.net/lgp88/article/details/7171924
 connectid = connect(socketid, (struct sockaddr*)&sockinfo, sizeof(sockinfo));
 ```
-
 4. 发送get请求
 ```c
 res = send(socketid, request, strlen(request), 0);
@@ -250,13 +246,11 @@ if (res == -1) {
     exit(1);
 }
 ```
-
 5. 阻塞接收服务器响应
 ```c
 // 接收的数据大小可能会大于缓冲区，可循环接收，当bufflen为0即读取完毕
 int bufflen = recv(socketid, text, TEXT_BUFFSIZE, 0);
 ```
-
 6. 输出重定向
 
 # 参考文章
