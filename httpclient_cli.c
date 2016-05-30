@@ -77,7 +77,7 @@ void geturl(char *url) {
 	strcat(request, "2333 Browser");
 	strcat(request, "\r\n");
 	strcat(request, "Author: ");
-	strcat(request, "By Jiavan&Kellen&LZY");
+	strcat(request, "By Jiavan&Keeln&LZY");
 	strcat(request, "\r\n");
 	strcat(request,"Cache-Control: no-cache\r\n\r\n");
 
