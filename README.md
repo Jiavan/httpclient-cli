@@ -263,3 +263,6 @@ Step 6: 输出重定向
 - http://net.pku.edu.cn/~yhf/linux_c/
 - http://blog.csdn.net/xrb66/article/details/6048399
 - http://blog.csdn.net/gogor/article/details/5896931
+
+# License
+![WTFPL](http://www.wtfpl.net/txt/copying/)
