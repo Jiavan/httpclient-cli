@@ -265,4 +265,4 @@ Step 6: 输出重定向
 - http://blog.csdn.net/gogor/article/details/5896931
 
 # License
-![WTFPL](http://www.wtfpl.net/txt/copying/)
+[WTFPL](http://www.wtfpl.net/txt/copying/)
