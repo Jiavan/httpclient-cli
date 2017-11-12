@@ -5,11 +5,11 @@ Linux下用C语言实现发送HTTP请求并获取html文档内容的CLI程序
 ## HTTP请求报文格式
 一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成，下图给出了请求报文的一般格式。
 
-![http-req.png](src/http-req.png)
+![http-req.png](./http-req.png)
 
 ## 基于TCP协议的网络通信流程
 
-![tcp.gif](src/tcp.gif)
+![tcp.gif](./tcp.gif)
 
 ## 相关数据结构
 ### sockaddr_in
